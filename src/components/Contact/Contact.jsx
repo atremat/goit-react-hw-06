@@ -3,10 +3,15 @@ import { FaUser } from "react-icons/fa";
 import css from "./Contact.module.css";
 import { LuUserMinus } from "react-icons/lu";
 import { LiaUserEditSolid } from "react-icons/lia";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 
-const Contact = ({ contact, onDelete, onEditContact }) => {
+const Contact = ({ contact }) => {
+  const dispatch = useDispatch();
+
   const handleEdit = () => {
-    onEditContact(contact);
+    // onEditContact(contact);
+    console.log("edit");
   };
 
   const { id, name, number } = contact;
@@ -23,7 +28,10 @@ const Contact = ({ contact, onDelete, onEditContact }) => {
         </div>
       </div>
       <div className={css.btnWrapper}>
-        <button className={css.btnDelete} onClick={() => onDelete(id)}>
+        <button
+          className={css.btnDelete}
+          onClick={() => dispatch(deleteContact(id))}
+        >
           <LuUserMinus className={css.deleteIcon} />
           Delete
         </button>
