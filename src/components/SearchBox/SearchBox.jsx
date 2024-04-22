@@ -1,9 +1,16 @@
 import { useId } from "react";
 import css from "./SearchBox.module.css";
 import { TbUserSearch } from "react-icons/tb";
+import { changeFilter } from "../../redux/filtersSlice";
+import { useDispatch } from "react-redux";
 
-const SearchBox = ({ value, onChange }) => {
+const SearchBox = () => {
   const searchValueId = useId();
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(changeFilter(e.target.value));
+  };
 
   return (
     <div className={css.container}>
@@ -13,8 +20,7 @@ const SearchBox = ({ value, onChange }) => {
       </label>
       <input
         type="text"
-        value={value}
-        onChange={onChange}
+        onChange={handleChange}
         id={searchValueId}
         className={css.input}
       />

@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import defaultContacts from "../data/contactList.json"; //default contactList
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { persistReducer } from "redux-persist";
 
-const contactsInitialState = { items: defaultContacts };
-// const contactsInitialState = { items: [] };
+const contactsInitialState = { items: [] };
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -19,7 +17,6 @@ const contactsSlice = createSlice({
       );
       return { items: filtered };
     },
-    //edit contact
   },
 });
 
@@ -28,11 +25,10 @@ export const { addContact, deleteContact } = contactsSlice.actions;
 const persistContactsConfig = {
   key: "contacts",
   storage,
+  whitelist: ["items"],
 };
 
 export const contactsReducer = persistReducer(
   persistContactsConfig,
   contactsSlice.reducer
 );
-
-// export const contactsReducer = contactsSlice.reducer;

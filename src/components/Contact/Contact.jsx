@@ -2,17 +2,11 @@ import { FaPhone } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import css from "./Contact.module.css";
 import { LuUserMinus } from "react-icons/lu";
-import { LiaUserEditSolid } from "react-icons/lia";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contactsSlice";
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
-
-  const handleEdit = () => {
-    // onEditContact(contact);
-    console.log("edit");
-  };
 
   const { id, name, number } = contact;
   return (
@@ -34,10 +28,6 @@ const Contact = ({ contact }) => {
         >
           <LuUserMinus className={css.deleteIcon} />
           Delete
-        </button>
-        <button className={css.btnEdit} onClick={handleEdit}>
-          <LiaUserEditSolid className={css.editIcon} />
-          Edit
         </button>
       </div>
     </li>

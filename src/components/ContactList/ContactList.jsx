@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
-import { getStatusFilter, selectContacts } from "../../redux/selector";
+import { selectNameFilter, selectContacts } from "../../redux/selector";
 
 //filtered contacts which contain searchValue
 const getVisibleContacts = (contacts, searchValue) => {
@@ -13,7 +13,7 @@ const getVisibleContacts = (contacts, searchValue) => {
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
-  const searchValue = useSelector(getStatusFilter);
+  const searchValue = useSelector(selectNameFilter);
   const visibleContacts = getVisibleContacts(contacts, searchValue);
 
   return (
