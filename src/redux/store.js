@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { contactsReducer } from "./contactsSlice";
 import { filtersReducer } from "./filtersSlice";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { persistReducer } from "redux-persist";
 import {
   FLUSH,
   REHYDRATE,
@@ -11,9 +13,20 @@ import {
   persistStore,
 } from "redux-persist";
 
+const persistContactsConfig = {
+  key: "contacts",
+  storage,
+  whitelist: ["items"],
+};
+
+export const persistedContactsReducer = persistReducer(
+  persistContactsConfig,
+  contactsReducer
+);
+
 export const store = configureStore({
   reducer: {
-    contacts: contactsReducer,
+    contacts: persistedContactsReducer,
     filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
